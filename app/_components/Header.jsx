@@ -9,7 +9,7 @@ function Header() {
 
   return (
     <div className="p-5 flex justify-between items-center">
-      <Image src={"logo.svg"} width={130} height={100} alt="logo" />
+      <Image src={"logo.svg"} width={160} height={100} alt="logo" />
       {isSignedIn ? (
         <UserButton />
       ) : (
