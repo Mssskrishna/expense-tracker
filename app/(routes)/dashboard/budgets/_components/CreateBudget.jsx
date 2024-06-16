@@ -18,7 +18,7 @@ import { db } from "../../../../../utils/dbConfig";
 import { Budgets } from "../../../../../utils/schema";
 import { toast } from "sonner";
 
-function CreateBudget() {
+function CreateBudget({refreshData}) {
   const [emojiIcon, setemojiIcon] = useState("😀");
   const [openEmojjPicker, setopenEmojiPicker] = useState(false);
 
@@ -34,6 +34,7 @@ function CreateBudget() {
       createdBy: user.primaryEmailAddress.emailAddress,
     });
     if(result){
+      refreshData();
       toast("New Budget Created")
     }
   };
@@ -46,7 +47,7 @@ function CreateBudget() {
             className="flex flex-col cursor-pointer items-center 
     border-dashed bg-slate-100 p-10 rounded-md hover:shadow-md "
           >
-            <h2 className="text-3xl">+</h2>
+            <h2 className="text-2xl">+</h2>
             <h2>Create Budget</h2>
           </div>
         </DialogTrigger>
@@ -63,7 +64,7 @@ function CreateBudget() {
                   {emojiIcon}
                 </Button>
               </div>
-              <div className="absolute">
+              <div className="absolute z-20">
                 <EmojiPicker
                   open={openEmojjPicker}
                   onEmojiClick={(e) => {
