@@ -19,7 +19,7 @@ function ExpenseList({ expensesInfo,refreshData }) {
   };
   return (
     <div className="mt-3">
-      <div className="grid grid-cols-4 bg-slate-200 p-2 gap-2">
+      <div className="grid grid-cols-4 bg-slate-200 p-2 text-xs sm:text-base">
         <h2 className="font-bold">Name</h2>
         <h2 className="font-bold">Amount</h2>
         <h2 className="font-bold">Date</h2>
@@ -27,13 +27,13 @@ function ExpenseList({ expensesInfo,refreshData }) {
       </div>
       {expensesInfo && expensesInfo.length > 0 ? (
         expensesInfo.map((expense, index) => (
-          <div key={index} className="grid grid-cols-4 bg-slate-40 p-2 gap-2">
+          <div key={index} className="grid grid-cols-4 bg-slate-40 p-2 text-xs sm:text-base">
             <h2>{expense.name}</h2>
             <h2>{expense.amount}</h2>
             <h2>{expense.createdAt}</h2>
             <h2>
               <Trash
-                className="text-red-600 sm:text-xl"
+                className="text-red-600"
                 onClick={() => {
                   deleteExpense(expense);
                 }}
