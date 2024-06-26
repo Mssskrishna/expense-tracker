@@ -1,5 +1,6 @@
 import {  pgTable, serial } from "drizzle-orm/pg-core";
 import { varchar,integer,numeric } from "drizzle-orm/pg-core";
+
 export const Budgets = pgTable("budgets", {
   id: serial("id").primaryKey(),
   name: varchar("name").notNull(),

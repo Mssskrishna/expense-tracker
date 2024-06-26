@@ -1,10 +1,27 @@
 import React from "react";
 import { UserButton } from "@clerk/nextjs";
-
-function DashboardHeader() {
+import { Menu, MenuIcon, ScanSearch } from "lucide-react";
+import { Input } from "../../../../components/ui/input";
+import { Button } from "../../../../components/ui/button";
+import SideNav from "./SideNav";
+function DashboardHeader({toggleSidebar}) {
+  // const toggleSidebar = null;
   return (
-    <div className="flex justify-between p-5 shadow-sm border-b">
-      <div>Seach Bar</div>
+    <div className="flex justify-between p-5 shadow-sm border-b items-center">
+      <div className="flex items-center">
+        <button className="mr-4 lg:hidden" onClick={toggleSidebar}>
+          <Menu size={32} />
+        </button>
+        <div className="border rounded-lg flex items-center w-[250px]" onClick={toggleSidebar}>
+          <Button className="bg-primary border-none">
+            <ScanSearch />
+          </Button>
+          <Input
+            className="border-transparent focus-visible:outline-none focus:ring-0"
+            placeholder="search bar(needs to implement)"
+          />
+        </div>
+      </div>
       <div>
         <UserButton />
       </div>

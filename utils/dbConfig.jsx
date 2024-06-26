@@ -1,6 +1,10 @@
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
-import * as schema from "./schema";
-const sql = neon('postgresql://neondb_owner:j5RfevtkqLO1@ep-muddy-mode-a5gew9qs.us-east-2.aws.neon.tech/Expenses-Tracker?sslmode=require');
-export const db = drizzle(sql, { schema });
+require('dotenv').config();
 
+import * as schema from "./schema";
+
+const databaseurl = process.env.NEXT_PUBLIC_DATABASE_URL;
+const sql = neon(databaseurl);
+
+export const db = drizzle(sql, { schema });

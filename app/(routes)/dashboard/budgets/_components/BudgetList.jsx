@@ -40,7 +40,7 @@ function BudgetList() {
           }}
         />
         {budgetList.length > 0
-          ? budgetList.map((budget, index) => <BudgetItem budget={budget} />)
+          ? budgetList.map((budget, index) => <BudgetItem budget={budget} key={index}/>)
           : [1, 2, 3].map((item, index) => (
               <div
                 key={index}
