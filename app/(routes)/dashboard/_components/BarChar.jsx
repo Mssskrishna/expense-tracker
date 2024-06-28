@@ -17,7 +17,7 @@ function BarChar({ budgetList }) {
           data={budgetList}
           margin={{ top: 5 }}
         >
-          <XAxis dataKey="name" />
+          <XAxis dataKey="name" className="text-xs"/>
           <YAxis />
           <Tooltip />
           <Legend />
