@@ -31,7 +31,7 @@ function DashboardHeader({ toggleSidebar }) {
           </Button>
           <Input
             className="border-transparent focus-visible:outline-none focus:ring-0"
-            placeholder="search bar(needs to implement)"
+            placeholder="search bar"
             value={searchQuery}
             onChange={handleSearch}
           />
