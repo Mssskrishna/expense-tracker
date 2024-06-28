@@ -2,17 +2,22 @@
 import React, { useEffect, useId, useState } from "react";
 import CreateBudget from "./CreateBudget";
 import { db } from "../../../../../utils/dbConfig";
-import { getTableColumns, sql, eq, desc } from "drizzle-orm";
+import { getTableColumns, sql, eq, desc, ilike } from "drizzle-orm";
 import { Budgets, Expenses } from "../../../../../utils/schema";
 import { useUser } from "@clerk/nextjs";
 import BudgetItem from "./BudgetItem";
+import { useRouter, useSearchParams } from "next/navigation";
 
 function BudgetList() {
   const [budgetList, setBudgetLit] = useState([]);
   const { user } = useUser();
+  const { router } = useRouter();
+  const searchParams = useSearchParams();
+  const searchQuery = searchParams.get("search") || "";
+
   useEffect(() => {
     getBudgetList();
-  }, [user]);
+  }, [user, searchQuery]);
   /**
    * used to get Budget List
    */
@@ -26,7 +31,9 @@ function BudgetList() {
       .from(Budgets)
       .leftJoin(Expenses, eq(Budgets.id, Expenses.budgetId))
       .where(eq(Budgets.createdBy, user?.primaryEmailAddress?.emailAddress))
-      .groupBy(Budgets.id).orderBy(desc(Budgets.id));
+      .where(ilike(Budgets.name, `%${searchQuery}%`))
+      .groupBy(Budgets.id)
+      .orderBy(desc(Budgets.id));
 
     setBudgetLit(result);
   };
@@ -40,7 +47,9 @@ function BudgetList() {
           }}
         />
         {budgetList.length > 0
-          ? budgetList.map((budget, index) => <BudgetItem budget={budget} key={index}/>)
+          ? budgetList.map((budget, index) => (
+              <BudgetItem budget={budget} key={index} />
+            ))
           : [1, 2, 3].map((item, index) => (
               <div
                 key={index}
